@@ -122,5 +122,3 @@ Os resultados podem variar conforme os parâmetros utilizados e o ambiente de ex
 - O conjunto de imagens utilizado nas etapas 2 e 3 está incluído no repositório por meio do Git LFS.
 
 ---
-
-**Projeto acadêmico — Engenharia de Computação**
