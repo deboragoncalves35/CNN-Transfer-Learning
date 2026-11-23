@@ -1,12 +1,8 @@
 # CNN and Transfer Learning
 
-Projeto acadêmico de classificação de imagens utilizando redes neurais convolucionais (CNN) e Transfer Learning com Python, PyTorch, Torchvision e FastAI.
+Projeto acadêmico de classificação de imagens utilizando Redes Neurais Convolucionais (CNN) e Transfer Learning com Python e PyTorch.
 
-O notebook apresenta três etapas principais:
-
-1. **Classificação de cães e gatos com FastAI:** utilização de uma ResNet34 pré-treinada e fine-tuning para distinguir imagens de cães e gatos. Nesta etapa, o FastAI baixa o conjunto de imagens Oxford-IIIT Pet por meio de `untar_data`.
-2. **Classificação binária com uma CNN própria:** implementação e treinamento de uma rede convolucional com PyTorch para classificar as duas classes organizadas em `Data/Duas`.
-3. **Classificação de raças com Transfer Learning:** utilização da arquitetura ResNet18 pré-treinada, com adaptação da camada final para o conjunto de classes organizado em `Data/Multi`.
+O objetivo é explorar diferentes abordagens de classificação de imagens, desde a implementação de uma CNN própria até a utilização de arquiteturas pré-treinadas.
 
 ## Tecnologias utilizadas
 
@@ -14,104 +10,117 @@ O notebook apresenta três etapas principais:
 - PyTorch
 - Torchvision
 - FastAI
+- ResNet18 e ResNet34
 - NumPy
 - Matplotlib
-- IPywidgets
 - Jupyter Notebook
+
+## Etapas do projeto
+
+### 1. Classificação de cães e gatos com FastAI
+
+- Utilização do conjunto de imagens Oxford-IIIT Pet.
+- Aplicação de Transfer Learning com a arquitetura ResNet34 pré-treinada.
+- Treinamento e teste do modelo para distinguir imagens de cães e gatos.
+
+### 2. Classificação binária com CNN
+
+- Implementação de uma Rede Neural Convolucional própria utilizando PyTorch.
+- Construção de camadas convolucionais, pooling e fully connected.
+- Classificação de imagens em duas classes.
+- Treinamento e avaliação do modelo por meio de métricas de desempenho.
+
+### 3. Classificação de raças de cães com Transfer Learning
+
+- Utilização da arquitetura ResNet18 pré-treinada.
+- Congelamento dos parâmetros das camadas convolucionais.
+- Adaptação da camada classificadora para 12 classes.
+- Treinamento, teste e validação do modelo.
+- Análise das curvas de perda e acurácia.
 
 ## Estrutura do projeto
 
 ```text
 CNN-Transfer-Learning/
 ├── CNN_Transfer_Learning.ipynb
-├── requirements.txt
-├── utils.py
 ├── Data/
 │   ├── Duas/
 │   └── Multi/
-└── Figures/
+├── Figures/
+│   └── Figure1.png
+├── requirements.txt
+├── utils.py
+└── README.md
 ```
 
-O arquivo `utils.py` contém funções auxiliares utilizadas para desenhar a representação da arquitetura da CNN. A pasta `Figures` reúne material visual complementar do projeto.
+## Como executar
 
-## Requisitos
+### 1. Clone o repositório
 
-- Python 3.10 ou 3.11 recomendado.
-- Jupyter Notebook ou JupyterLab.
-- Para treinamento mais rápido, recomenda-se utilizar uma GPU compatível com PyTorch. O notebook também pode ser executado em CPU, mas o treinamento pode demorar mais.
+```bash
+git clone https://github.com/deboragoncalves35/CNN-Transfer-Learning.git
+cd CNN-Transfer-Learning
+```
 
-## Instalação
+### 2. Crie um ambiente virtual (opcional)
 
-1. Clone este repositório:
+Windows:
 
-   ```bash
-   git clone https://github.com/SEU-USUARIO/CNN-Transfer-Learning.git
-   cd CNN-Transfer-Learning
-   ```
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
 
-2. (Opcional, mas recomendado) Crie e ative um ambiente virtual:
+Linux/macOS:
 
-   **Windows**
-   ```bash
-   python -m venv .venv
-   .venv\\Scripts\\activate
-   ```
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-   **Linux/macOS**
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
+### 3. Instale as dependências
 
-3. Instale as dependências:
+```bash
+pip install -r requirements.txt
+pip install notebook
+```
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+Para executar o treinamento com GPU, instale a versão do PyTorch compatível com seu hardware, seguindo as instruções da documentação oficial: https://pytorch.org/get-started/locally/
 
-   Caso a instalação de `torch` ou `torchvision` apresente incompatibilidade com seu sistema ou GPU, consulte o seletor oficial de instalação do PyTorch: https://pytorch.org/get-started/locally/
+### 4. Execute o notebook
 
-4. Inicie o Jupyter:
+```bash
+jupyter notebook
+```
 
-   ```bash
-   jupyter notebook
-   ```
+Abra o arquivo `CNN_Transfer_Learning.ipynb` e execute as células na ordem.
 
-5. Abra `CNN_Transfer_Learning.ipynb` e execute as células na ordem.
+O notebook utiliza caminhos relativos para acessar os arquivos do projeto. Portanto, execute-o a partir da pasta principal do repositório.
 
 ## Organização dos dados
 
-As etapas 2 e 3 utilizam os dados locais nas pastas `Data/Duas` e `Data/Multi`. O carregamento é feito com `torchvision.datasets.ImageFolder`, que espera uma subpasta para cada classe.
+As etapas de classificação binária e classificação de raças utilizam os conjuntos de imagens armazenados em `Data/Duas` e `Data/Multi`.
 
-Organize os arquivos de imagem neste formato:
+Os dados são carregados com `torchvision.datasets.ImageFolder`, que organiza as imagens conforme as pastas de cada classe.
 
-```text
-Data/
-├── Duas/
-│   ├── classe_1/
-│   │   ├── imagem_001.jpg
-│   │   └── ...
-│   └── classe_2/
-│       ├── imagem_001.jpg
-│       └── ...
-└── Multi/
-    ├── raca_1/
-    │   ├── imagem_001.jpg
-    │   └── ...
-    ├── raca_2/
-    │   └── ...
-    └── ...
-```
+Na primeira etapa, o conjunto Oxford-IIIT Pet é obtido automaticamente por meio da função `untar_data` do FastAI.
 
-Mantenha os nomes e a organização das classes do conjunto de dados original. Não é necessário baixar manualmente o conjunto Oxford-IIIT Pet para a primeira etapa: o próprio notebook utiliza a função `fastai.untar_data` para obtê-lo.
+## Resultados e avaliação
+
+O notebook apresenta ferramentas para acompanhar o treinamento dos modelos, incluindo:
+
+- Gráficos de perda (*training loss* e *test loss*).
+- Evolução da acurácia ao longo das épocas.
+- Avaliação do modelo com dados de validação.
+
+Os resultados podem variar conforme os parâmetros utilizados e o ambiente de execução.
 
 ## Observações
 
-- Execute o notebook a partir da pasta raiz do projeto, para que os caminhos relativos `Data/` e `Figures/` sejam localizados corretamente.
-- O notebook contém etapas de treinamento que podem consumir bastante memória e tempo de processamento.
-- Os resultados dependem do ambiente, dos dados e dos parâmetros de treinamento utilizados.
-- O dataset é necessário para executar as etapas que carregam `Data/Duas` e `Data/Multi`.
+- O treinamento pode exigir bastante processamento e memória.
+- Recomenda-se utilizar GPU para reduzir o tempo de treinamento.
+- O conjunto de imagens utilizado nas etapas 2 e 3 está incluído no repositório por meio do Git LFS.
 
-## Objetivo
+---
 
-Explorar a implementação de CNNs, o processamento de imagens, o treinamento e a avaliação de modelos, além da aplicação de Transfer Learning com arquiteturas pré-treinadas.
+**Projeto acadêmico — Engenharia de Computação**
