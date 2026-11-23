@@ -120,5 +120,4 @@ Os resultados podem variar conforme os parâmetros utilizados e o ambiente de ex
 - O treinamento pode exigir bastante processamento e memória.
 - Recomenda-se utilizar GPU para reduzir o tempo de treinamento.
 - O conjunto de imagens utilizado nas etapas 2 e 3 está incluído no repositório por meio do Git LFS.
-
 ---
